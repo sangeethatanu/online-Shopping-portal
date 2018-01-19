@@ -1,5 +1,7 @@
 package com.DaoImpl;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,11 +13,13 @@ import com.model.Cart;
 import com.model.Category;
 import com.model.Product;
 
-import antlr.collections.List;
+
 @Repository
 public class CartDaoImpl implements CartDao {
+	
 	@Autowired
 	SessionFactory sessionFactory;
+	private int cartProductId;
 		
 	@Autowired
 	public CartDaoImpl(SessionFactory sessionFactory)
@@ -41,7 +45,7 @@ public class CartDaoImpl implements CartDao {
 		try {
 			
 			session.beginTransaction();
-			cr=(List<Cart>).session.createQuery("from Product where userMailId=:email").setString("email",userId).list();
+			cr=(List<Cart>)session.createQuery("from Product where userMailId=:email").setString("email",userId).list();
 			session.getTransaction().commit();
 		}
 catch(HibernateException e) {
@@ -49,7 +53,7 @@ catch(HibernateException e) {
 	e.printStackTrace();
 session.getTransaction().rollback();
 }
-			return p;
+			return cr;
 		
 	}
 	
@@ -61,7 +65,8 @@ session.getTransaction().rollback();
 		try {
 			
 			session.beginTransaction();
-			cr=session.createQuery("from Product where userMail & cartProductID=:pid").setString("email",userEmail).setInteger("id",cartProductid).uniqueResultId();
+			cr=(Cart) session.createQuery("from Product where userMail & "
+		+ "cartProductID=:pid").setString("email",userEmail).setInteger("id",cartProductId).uniqueResult();
 			session.getTransaction().commit();
 		}
 catch(HibernateException e) {
@@ -92,9 +97,5 @@ session.getTransaction().rollback();
 	session.getTransaction().commit();
 
 	}
-	
-	
-	
-	
-	
+		
 }

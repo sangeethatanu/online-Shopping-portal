@@ -26,13 +26,13 @@
 </div>
 <div class="carousel-inner">
 <div class="item-active">
-<img class="img-rounded" class="img-responsive center-block" src="<spring:url value="image\\watch1.jpg"></spring:url>" style="width:100%"/>"
+<img class="img-rounded" class="img-responsive center-block" src="<spring:url value="assets\\watch1.jpg"></spring:url>" style="width:100%"/>"
 </div></div>
 <div class="item">
-<img class="img-rounded" class="img-responsive center-block" src="<spring:url value="image\\watch2.jpeg"></spring:url>" style="width:100%">
+<img class="img-rounded" class="img-responsive center-block" src="<spring:url value="assets\\watch2.jpg"></spring:url>" style="width:100%">
 </div>
 <div class="item">
-<img class="img-rounded" class="img-responsive center-block" src="<spring:url value="image\\watch3.jpg"></spring:url>" style="width:100%">
+<img class="img-rounded" class="img-responsive center-block" src="<spring:url value="assets\\watch3.jpg"></spring:url>" style="width:100%">
 </div>
 <a class="left carousel-control" href="#mycarousel" data-slide="prev">
 <span class="glyphicon glyphicon-chevron-left"></span>

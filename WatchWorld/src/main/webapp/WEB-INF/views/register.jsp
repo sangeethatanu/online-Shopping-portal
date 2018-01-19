@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/form" prefix="form"%>
+<%@ taglib prefix="form"
+uri="http://www.springframework.org/tags/form" %>
 
 <!doctype html>
 <html>
@@ -21,26 +22,31 @@
 <form:form modelAttribute="user" action="saveRegister" method="post"> 
 
 <div class="form-group">
+<form:errors path="name"  cssclass="err"/><br> 
 <label>Name:</label><br>
 <form:input path="name" class="form-control" placeholder="Enter Name"/>
 </div>
 
 <div class="form-group">
+<form:errors path="email"  cssclass="err"/><br>
 <label>Email:</label><br>
 <form:input path="email" class="form-control" placeholder="Enter Email"/>
 </div>
 
 <div class="form-group">
+<form:errors path="password"  cssclass="err"/><br>
 <label>Password:</label><br>
 <form:input path="password" class="form-control" placeholder="Enter Password"/>
 </div>
 
 <div class="form-group">
+<form:errors path="address"  cssclass="err"/><br>
 <label>Address:</label><br>
 <form:input path="address" class="form-control" placeholder="Enter Address"/>
 </div>
 
 <div class="form-group">
+<form:errors path="phone"  cssclass="err"/><br>
 <label>Phone:</label><br>
 <form:input path="phone" class="form-control" placeholder="Enter Phone"/>
 </div>

@@ -5,7 +5,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.model.Cart;
+import javax.persistence.criteria.Order;
+
+import org.hibernate.HibernateException;
+import org.springframework.stereotype.Service;
+
+import com.Dao.OrderDao;
+
 import com.model.Orders;
 
 @Repository("orderDaoImpl")
@@ -14,7 +20,7 @@ public class OrdersDaoImpl implements OrderDao {
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public OrdersDaoImpl()
+	public OrdersDaoImpl(SessionFactory sessionFactory)
 	{
 		this.sessionFactory=sessionFactory;
 	}
@@ -24,4 +30,18 @@ public class OrdersDaoImpl implements OrderDao {
 		{
 		Session session=sessionFactory.openSession();
 		session.persist(order);
+		session.beginTransaction();
+		session.getTransaction().commit();
+
+		}
+
+		public void insertOrder(Order order) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+				
+
+
 }

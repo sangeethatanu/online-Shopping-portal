@@ -26,37 +26,34 @@
 <th class="span2">Action</th>
 </tr>
 
-<c:if test="$ empty catList}">
+<c:if test="${ empty catList}">
 <tr>
     <td colspan="10" align="center">The list is empty.</td></tr>
 </c:if>
 
 
- <c:forEach var = "p" varstatus="st" items = "${cList}">
+ <c:forEach var = "c" varstatus="st" items = "${cList}">
             <tr>
-            <td><c:out value = "${p.count}"/></td>
-               <td><c:out value = "${p.cid}"/></td>
-               <td><c:out value = "${p.cname}"/></td>
-               <td><c:out value = "${p.supplier.suppliername}"/></td>
-               <td><c:out value = "${p.category.cname}"/></td>
-               <td><c:out value = "${p.price}"/></td>
-               <td><c:out value = "${p.stock}"/></td>              
-               <td><img src="${pageContext.request.contextPath }/resources/${p.imgName}" height="50px" width="50px"></td>
-               <td class="span4">
+            <td><c:out value = "${c.count}"/></td>
+               <td><c:out value = "${c.cid}"/></td>
+               <td><c:out value = "${c.cname}"/></td>
+               <td><c:out value = "${c.supplier.suppliername}"/></td>
+               <td><c:out value = "${c.category.cname}"/></td>
+                             
+               <td><img src="${pageContext.request.contextPath }/resources/${p.imgName}" height="50px" width="50px"/></td>
+               <td class="span3">
                <td><c:out src=contextRoot value = "${pageContext.request.contextPath }"/>
-                  <a  class="btn btn-info" role="button" href="<c:url value="${contextRoot}/admin/updateProd?cid=<c:out value="${p.cid}"></c:out>"/>Edit</a>       
-               <a  class="btn btn-danger" role="button" href="<c:url value="/admin/deleteProd/${p.cid }"/>"/>Delete</a></td>
-              
+               <!-- 
+    <a class="btn btn-info" role="button" href="<c:url value="${contextRoot}/admin/updateprod?cid=<c:out value="${c.cid}"/>">">Edit</a>       
+               <a class="btn btn-danger" role="button" href="<c:url value="/admin/deleteProd/${c.cid }"/>">Delete</a></td>
+               -->
                </td>
             </tr>
          </c:forEach>
-
-
-
-
-
-
-
 </table>
+</div>
+</body>
+</html>
+
 
 

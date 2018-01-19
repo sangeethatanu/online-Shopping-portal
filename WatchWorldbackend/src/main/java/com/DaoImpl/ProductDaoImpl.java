@@ -1,7 +1,7 @@
 package com.DaoImpl;
 import com.model.*;
 
-import antlr.collections.List;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -12,10 +12,9 @@ import com.Dao.*;
 public class ProductDaoImpl implements ProductDao {
 
 	@Autowired
-	SessionFactory sessionFactory;
-		
-	@Autowired
-	public ProdutDaoImpl(SessionFactory sessionFactory)
+	SessionFactory sessionFactory;	
+	
+	public void ProdutDaoImpl(SessionFactory sessionFactory)
 	{	
 	this.sessionFactory=sessionFactory;
 
@@ -38,7 +37,7 @@ public class ProductDaoImpl implements ProductDao {
 	session.getTransaction().commit();
 	return li;
 }
-	public Product findBySuppId(int pid)
+	public Product findByPID(int pid)
 	{
 		
 		Session session=sessionFactory.openSession();
@@ -46,7 +45,7 @@ public class ProductDaoImpl implements ProductDao {
 		try {
 			
 			session.beginTransaction();
-			p=session.get(Product.class,pid);
+			p=(Product) session.get(Product.class,pid);
 			session.getTransaction().commit();
 		}
 catch(HibernateException e) {
@@ -95,6 +94,23 @@ session.getTransaction().rollback();
 	session.delete(p);
 	session.getTransaction().commit();
 
+	}
+	public Product findByPID() {
+
+		Session session=sessionFactory.openSession();
+		Product p=null;
+		try {
+			
+			session.beginTransaction();
+			p=(Product) session.get(Product.class,p);
+			session.getTransaction().commit();
+		}
+catch(HibernateException e) {
+	
+	System.out.println(e.getMessage());
+session.getTransaction().rollback();
+}
+			return p;
 	}
 	
 	

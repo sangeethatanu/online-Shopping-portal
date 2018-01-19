@@ -1,5 +1,7 @@
 package com.DaoImpl;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.Dao.CategoryDao;
 import com.model.Category;
 
-import antlr.collections.List;
 @Repository
 @Service
 public class CategoryDaoImpl implements CategoryDao {
@@ -32,7 +33,17 @@ public class CategoryDaoImpl implements CategoryDao {
 	session.getTransaction().commit();
 
 	}
-	public Category findBySuppId(int cid)
+	
+	public List<Category> retrieve()
+	{
+	Session session=sessionFactory.openSession();
+	session.beginTransaction();
+    List<Category> li=session.createQuery("from Category").list();
+	session.getTransaction().commit();
+	return li;
+}
+	
+	public Category findByCatId(int cid)
 	{
 		
 		Session session=sessionFactory.openSession();
@@ -40,7 +51,7 @@ public class CategoryDaoImpl implements CategoryDao {
 		try {
 			
 			session.beginTransaction();
-			c=session.get(Category.class,cid);
+			c=(Category) session.get(Category.class,cid);
 			session.getTransaction().commit();
 		}
 catch(HibernateException e) {

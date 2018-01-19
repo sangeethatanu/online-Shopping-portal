@@ -3,6 +3,7 @@ package com.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +20,10 @@ public class indexController {
 @Autowired
 ProductDaoImpl productDaoImpl;
 
+@Autowired
 	UserDaoImpl userDaoImpl;
+
+private CategoryDaoImpl categoryDaoImpl;
 	@RequestMapping("/")
 	public String index()
 	{
@@ -36,15 +40,17 @@ ProductDaoImpl productDaoImpl;
 	}
 	
 	@RequestMapping(value="/saveRegister",method=RequestMethod.POST)
-	public ModelAndView saveRegister(@ModelAttribute("user")User user)
+	public ModelAndView saveRegister(@ModelAttribute("user")User user,BindingResult result)
 	{
 		ModelAndView mav=new ModelAndView();
-		
+if(result.hasErrors()) {
+	mav.setViewName("register");
+	return mav;
+}	else {	
 		user.setRole("ROLE_USER");
 		userDaoImpl.insertUser(user);
 		mav.setViewName("index");
-		
-		return mav;
+		return mav;}
 	}
 	
 	@RequestMapping(value="/productCustList")
@@ -52,15 +58,15 @@ ProductDaoImpl productDaoImpl;
 	{
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("prodList",productDaoImpl.retrieve());
-		mv.setViewName(productCustList);
+		mv.setViewName("ProdCustList");
 		return mv;
 	}
 	@ModelAttribute
 	public void getData(Model m)
-		
+			
 	{
 		
-		m.addAttribute("catList",CategoryDaoImpl.retrieve());
+		m.addAttribute("catList",categoryDaoImpl.retrieve());
 		
 	}
 	
@@ -76,6 +82,11 @@ ProductDaoImpl productDaoImpl;
 
 	@RequestMapping(value="/error")
 	public String userError() {
+		
 		return "error";	}
+	
+	@RequestMapping(value="/reLogin")
+	public String relogin() {
+		return "redirect:/goToLogin";	}
 }
 

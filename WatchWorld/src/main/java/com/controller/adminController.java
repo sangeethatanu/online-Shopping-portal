@@ -3,8 +3,9 @@ package com.controller;
 
 
 import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.function.Supplier;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,20 +24,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
-import com.DaoImpl.UserDaoImpl;
+
 import com.model.Category;
 import com.model.Product;
-import com.model.User;
+import com.model.Supplier;
+
 
 @Controller
 public class adminController {
 
-	@RequestMapping("/modal")
-	public String modal()
-	{
-		return "modal"; 
-		
-	}
 	
 
 	@RequestMapping("/admin")
@@ -45,7 +41,7 @@ public class adminController {
 		return "admin"; 
 		
 	}
-	
+			
 	@Autowired
 	SupplierDaoImpl supplierDaoImpl; 
 	
@@ -61,8 +57,8 @@ public class adminController {
 	{
 ModelAndView mv=new ModelAndView();
 		Supplier ss=new Supplier();
-		ss.setSid(sid);
-		ss.setSupplierName(sname);
+	 ss.setSid(sid);
+		 ss.setSupplierName(sname);
 		supplierDaoImpl.insertSupplier(ss);
 		mv.setViewName("adding");
 		return mv;
@@ -77,7 +73,7 @@ ModelAndView mv=new ModelAndView();
 	{
 ModelAndView mv=new ModelAndView();
 		Category cc=new Category();
-	    cc.setcid(cid);
+	    cc.setCid(cid);
 		cc.setCategoryName(cname);
 		categoryDaoImpl.insertCategory(cc);
 		mv.setViewName("adding");
@@ -94,8 +90,8 @@ ModelAndView mv=new ModelAndView();
 		prod.setPrice(Double.parseDouble(request.getParameter("pPrice")));
 		prod.setDescription(request.getParameter("pDescription"));
 		prod.setStock(Integer.parseInt(request.getParameter("pStock")));
-		prod.setCategory(categoryDaoImpl.findByCatId(Integer.parseInt(request.getParameter("pCategory")));
-				prod.setSupplier(supplierDaoImpl.findBySuppId(Integer.parseInt(request.getParameter("pSupplier")));
+		prod.setCategory(categoryDaoImpl.findByCatId(Integer.parseInt(request.getParameter("pCategory"))));
+				prod.setSupplier(supplierDaoImpl.findBySuppId(Integer.parseInt(request.getParameter("pSupplier"))));
 				
 				
 		String filepath=request.getSession().getServletContext().getRealPath("/");
@@ -105,7 +101,8 @@ ModelAndView mv=new ModelAndView();
 		System.out.println("File path"+ filepath);
 		 try {
 			 byte imagebyte[] = file.getBytes();
-			 BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(filePath+"/resources/"));
+//			 BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(filePath+"/resources/"));
+			 BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(filepath+"/resources/"));
 			 fos.write(imagebyte);
 			 fos.close();
 		 }
@@ -126,9 +123,9 @@ ModelAndView mv=new ModelAndView();
 	@RequestMapping("/prodList")
 	public ModelAndView  prodList()
 	{
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv=new ModelAndView("ProductAdminList");
 		mv.addObject("prodList",productDaoImpl.retrieve());
-		mv.setViewName(ProductAdminList);
+		mv.setViewName("ProductAdminList");
 		return mv;
 	}
 	
@@ -138,7 +135,7 @@ ModelAndView mv=new ModelAndView();
 	{
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("satList",supplierDaoImpl.retrieve());
-		mv.setViewName(suppAdmin);
+		mv.setViewName("suppAdmin");
 		return mv;
 	}
 	
@@ -147,7 +144,7 @@ ModelAndView mv=new ModelAndView();
 	{
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("catList",categoryDaoImpl.retrieve());
-		mv.setViewName(categoryAdminList);
+		mv.setViewName("categoryAdminList");
 		return mv;
 	}
 	
@@ -195,7 +192,7 @@ ModelAndView mv=new ModelAndView();
 		System.out.println("File path"+ filepath);
 		 try {
 			 byte imagebyte[] = file.getBytes();
-			 BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(filePath+"/resources/"));
+			 BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(filepath+"/resources/"));
 			 fos.write(imagebyte);
 			 fos.close();
 		 }

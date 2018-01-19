@@ -48,19 +48,11 @@
                <td><img src="${pageContext.request.contextPath }/resources/${p.imgName}" height="50px" width="50px"></td>
                <td class="span4">
                <c:set src=contextRoot value = "${pageContext.request.contextPath }"/>
-                  <a class="btn btn-info" role="button" href="${contextRoot}/updateProd?pid=<c:out value="${p.pid}"></c:out>"/>Edit</a>      
-               <a class="btn btn-danger" role="button" href="<c:url value="/deleteProd/${p.pid }"/>">Delete</a>
-              
+               <!-- 
+                  <a class="btn btn-info" role="button" href="${contextRoot}/admin/updateProd?pid=<c:out value="${p.pid}"></c:out>Edit</a>      
+               <a class="btn btn-danger" role="button" href="<c:url value="/admin/deleteProd/${p.pid }"/>sDelete</a>
+               -->
                </td>
             </tr>
          </c:forEach>
-
-
-
-
-
-
-
 </table>
-
-

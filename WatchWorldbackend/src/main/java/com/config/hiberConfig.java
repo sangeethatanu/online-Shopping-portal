@@ -19,6 +19,7 @@ import com.DaoImpl.OrdersDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
 import com.DaoImpl.SupplierDaoImpl;
 import com.DaoImpl.UserDaoImpl;
+import com.model.Cart;
 import com.model.Category;
 import com.model.Product;
 import com.model.Supplier;
@@ -38,7 +39,7 @@ public class hiberConfig
 		DriverManagerDataSource dsource=new DriverManagerDataSource();
 		dsource.setDriverClassName("org.h2.Driver");
 		dsource.setUrl("jdbc:h2:tcp://localhost/~/WatchWorld");
-		dsource.setUserName("sa");
+		dsource.setUsername("sa");
 		dsource.setPassword("");
 		System.out.println("H2 Connected");
 		return dsource;
@@ -91,7 +92,7 @@ public class hiberConfig
 	@Bean(name="ProductDaoImpl")
 	public ProductDaoImpl saveProdData(SessionFactory sf)
 	{
-		return new ProductDaoImpl(sf);
+		return new ProductDaoImpl();
 	}
 	
 	@Autowired
@@ -110,7 +111,7 @@ public class hiberConfig
 	
 	@Autowired
 	@Bean(name="transactionManager")
-	public HibernateTransactionManager gettrans(SessionFactory sf);
+	public HibernateTransactionManager gettrans(SessionFactory sf)
 	{
 		
 		HibernateTransactionManager tm=new HibernateTransactionManager(sf);

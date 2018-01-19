@@ -21,38 +21,33 @@
 <tr>
 <th>SI.No</th>
 <th>PID</th>
-<th>Product Name</th>
+<th>Supplier Name</th>
 
 <th class="span2">Action</th>
 </tr>
 
-<c:if test="$ empty prodList}">
+<c:if test="$ empty suppList}">
 <tr>
     <td colspan="10" align="center">The list is empty.</td></tr>
 </c:if>
 
 
- <c:forEach var = "p" varstatus="st" items = "${prodList}">
+ <c:forEach var = "p" varstatus="st" items = "${sList}">
             <tr>
-               <td><c:out value = "${p.pid}"/></td>
-               <td><c:out value = "${p.pname}"/></td>
+               <td><c:out value = "${p.sid}"/></td>
+               <td><c:out value = "${p.sname}"/></td>
                <td><c:out value = "${p.supplier.suppliername}"/></td>
                <td><c:out value = "${p.category.cname}"/></td>
                
                <td><c:out src=contextRoot value = "${pageContext.request.contextPath }"/>
-                  <a  class="btn btn-info" role="button" href="<c:url value="${contextRoot}/admin/updateProd?id=<c:out value="${p.pid}"><c:out"></c:url>Edit</a>       
-               <a  class="btn btn-danger" role="button" href="<c:url value="/admin/deleteProd/${p.pid }"/>">Delete</a></td>
-              
-               </td>
+              <!-- 
+                  <a  class="btn btn-info" role="button" href="<c:url value="${contextRoot}/admin/updateProd?id=<c:out value="${p.sid}"/>"/>Edit</a>       
+               
+               <a  class="btn btn-danger" role="button" href="<c:url value="/admin/deleteProd/${p.sid }"/>Delete</a></td>
+                -->
             </tr>
          </c:forEach>
-
-
-
-
-
-
-
 </table>
-
-
+</div>
+</body>
+</html>

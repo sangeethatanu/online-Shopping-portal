@@ -23,8 +23,8 @@
 <div class="panel with-nav-tabs panel-primary">
 <div class="panel heading">
 <ul class="nav nav-tabs">
-<li class="active"><a href="#tab1" data-toggle="tab">Category</a>
-<li><a href="#tab2" data-toggle="tab">Supplier</a>
+<li class="active"><a href="#tab1" data-toggle="tab">Supplier</a>
+<li><a href="#tab2" data-toggle="tab">Category</a>
 <li><a href="#tab3" data-toggle="tab">Product</a>
 </ul>
 </div>

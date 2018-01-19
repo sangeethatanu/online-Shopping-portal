@@ -27,7 +27,7 @@
 <li><a href="index">Home</a>
 <li><a href="contact"><i class="fa fa-address-book" area-hidden="true"></i></a></li>
 <li><a href="ProductList">Product List</a></li>
-<li><a href="Admin">Admin</a></li>
+<li><a href="${pageContext.request.contextPath}/admin/adding">Admin</a></li>
 <li class="dropdown"><a class="dropdown-toogle" data-toogle="dropdown"
 href="#">Admin List<span class="caret"></span></a>
 <ul class="dropdown-menu">
@@ -60,7 +60,7 @@ href="#">Category Choice<span class="caret"></span></a>
 </c:if>
 
 
-</li>
+</li></ul>
 </div>
 </nav>
 </body>
